@@ -13,7 +13,8 @@ CREATE TABLE Goodreads_Books (
 
 CREATE TABLE Books_Urls (
     isbn VARCHAR   NOT NULL,
-    library_url VARCHAR   NOT NULL
+    library_url VARCHAR   NOT NULL,
+    url_yn int NOT NULL
 );
 
 ALTER TABLE Books_Urls ADD CONSTRAINT fk_Books_Urls_isbn FOREIGN KEY(isbn)
@@ -21,7 +22,7 @@ REFERENCES Goodreads_Books (isbn);
 
 -- Join the data table together
 CREATE TABLE combined_all 
-as SELECT goodreads_books.*, books_urls.library_url
+as SELECT goodreads_books.*, books_urls.library_url,books_urls.url_yn
 FROM goodreads_books LEFT JOIN books_urls
 ON goodreads_books.isbn = books_urls.isbn;
 
